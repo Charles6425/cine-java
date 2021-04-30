@@ -13,19 +13,19 @@ import java.util.Arrays;
 public class DBService  {
     @Autowired
     private SalaRepository salaRepository;
-//    @Autowired
-//    private FilmeRepository filmeRepository;
+    @Autowired
+    private FilmeRepository filmeRepository;
 
     public void instanciaBancoDeDados() {
         SalaModel sala1 = new SalaModel(null, "Sala 1", 40);
         SalaModel sala2 = new SalaModel(null, "Sala 2", 50);
         SalaModel sala3 = new SalaModel(null, "Sala 3", 60);
 
-//        FilmeModel filme1 = new FilmeModel(null,"","Titanic","Filme","2:00");
-//        FilmeModel filme2 = new FilmeModel(null,"","Duro de morrer","Barco afundando","1:00");
+        FilmeModel filme1 = new FilmeModel(null,"","Titanic","Filme","2:00");
+        FilmeModel filme2 = new FilmeModel(null,"","Duro de morrer","Barco afundando","1:00");
 
         salaRepository.saveAll(Arrays.asList(sala1, sala2, sala3));
-//        filmeRepository.saveAll(Arrays.asList(filme1,filme2));
+        filmeRepository.saveAll(Arrays.asList(filme1,filme2));
     }
 
 
