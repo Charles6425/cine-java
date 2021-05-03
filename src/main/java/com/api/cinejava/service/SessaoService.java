@@ -1,6 +1,7 @@
 package com.api.cinejava.service;
 
 
+import com.api.cinejava.model.FilmeModel;
 import com.api.cinejava.model.SalaModel;
 import com.api.cinejava.model.SessaoModel;
 import com.api.cinejava.repository.SessaoRepository;
@@ -8,6 +9,7 @@ import com.api.cinejava.service.exceptions.ObjectNotFoundExceptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,16 +20,32 @@ public class SessaoService {
     @Autowired
     private SalaService salaService;
 
+    @Autowired
+    private FilmeService filmeService;
+
     public SessaoModel findById(Integer id) {
         Optional<SessaoModel> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundExceptions("Objeto não encontrado! Id: " + id
                 + ", Titulo: " + SessaoModel.class.getName()));
     }
 
-    public SessaoModel create(Integer id_cat, SessaoModel obj) {
+    public List<SessaoModel> findAllBySala(Integer id_ses) {
+        salaService.findById(id_ses);
+        return repository.findAllByCategoria(id_ses);
+
+    }
+
+    public List<SessaoModel> findAll() {
+        return repository.findAll();
+    }
+
+
+    public SessaoModel create(Integer id_cat, Integer id_filme, SessaoModel obj) {
         obj.setId(null);
         SalaModel sala = salaService.findById(id_cat);
+        FilmeModel filme = filmeService.findById(id_filme);
         obj.setSalaModel(sala);
+        obj.setFilmeModel(filme);
         return repository.save(obj);
 
     }

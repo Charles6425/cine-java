@@ -18,7 +18,7 @@ public class FilmeModel implements Serializable {
     private String descricao;
     private String duracao;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "filmeModel")
     private List<SessaoModel> sessao = new ArrayList<>();
 
