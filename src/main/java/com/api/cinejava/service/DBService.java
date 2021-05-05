@@ -21,7 +21,7 @@ public class DBService  {
         SalaModel sala2 = new SalaModel(null, "Sala 2", 50);
         SalaModel sala3 = new SalaModel(null, "Sala 3", 60);
 
-        FilmeModel filme1 = new FilmeModel(null,"","Titanic","Filme","2:00");
+        FilmeModel filme1 = new FilmeModel(null,"","Titanic","Filme do jack e Rose","2:00");
         FilmeModel filme2 = new FilmeModel(null,"","Duro de morrer","Barco afundando","1:00");
 
         salaRepository.saveAll(Arrays.asList(sala1, sala2, sala3));

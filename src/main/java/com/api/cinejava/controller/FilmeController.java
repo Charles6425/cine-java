@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,14 +35,14 @@ public class FilmeController {
     }
 
     @PostMapping
-    public ResponseEntity<FilmeModel> create( @RequestBody FilmeModel obj){
+    public ResponseEntity<FilmeModel> create(@Valid @RequestBody FilmeModel obj){
         obj = service.create(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<FilmeDto> update(@PathVariable Integer id, @RequestBody FilmeDto objDto){
+    public ResponseEntity<FilmeDto> update(@PathVariable Integer id,@Valid @RequestBody FilmeDto objDto){
         FilmeModel newObj = service.update(id,objDto);
         return ResponseEntity.ok().body(new FilmeDto(newObj));
 

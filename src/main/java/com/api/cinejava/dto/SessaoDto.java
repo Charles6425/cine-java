@@ -1,17 +1,26 @@
 package com.api.cinejava.dto;
 
 import com.api.cinejava.model.SessaoModel;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class SessaoDto implements Serializable {
 
     private Integer id;
+    @NotEmpty(message = "O campo Data é requerido!")
+    @Length(min = 10, max = 10, message = "O campo Data deve conter 10 caracteres!")
     private String data;
+    @NotEmpty(message = "O campo Início é requerido!")
+    @Length(min = 4, max = 5, message = "O campo Início deve conter 5 caracteres!")
     private String hora_inicio;
     private String hora_fim;
+    @NotEmpty(message = "O campo Valor é requerido!")
     private Float valor_ingresso;
+    @NotEmpty(message = "O campo Tipo de Animação é requerido!")
     private String tipo_animacao;
+    @NotEmpty(message = "O campo Tipo de Áudio é requerido!")
     private String tipo_audio;
 
     public SessaoDto(){

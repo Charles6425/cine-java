@@ -1,8 +1,10 @@
 package com.api.cinejava.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +16,14 @@ public class FilmeModel implements Serializable {
     private Integer id;
 
     private String imagem;
+    @NotEmpty(message = "O campo Título é requerido!")
+    @Length(min = 3, max = 150, message = "O campo Título deve conter entre 3 e 150 caracteres!")
     private String titulo;
+    @NotEmpty(message = "O campo Descrição é requerido!")
+    @Length(min = 10, max = 2000000, message = "O campo Descriçao deve conter entre 10 e 2000000 caracteres!")
     private String descricao;
+    @NotEmpty(message = "O campo Duração é requerido!")
+    @Length(min = 4, max = 5, message = "O campo Duração deve conter 5 caracteres!")
     private String duracao;
 
 
