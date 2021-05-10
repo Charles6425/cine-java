@@ -19,7 +19,7 @@ public class SessaoModel implements Serializable {
     @Length(min = 4, max = 5, message = "O campo Início deve conter 5 caracteres!")
     private String hora_inicio;
     private String hora_fim;
-    @NotEmpty(message = "O campo Valor é requerido!")
+
     private Float valor_ingresso;
     @NotEmpty(message = "O campo Tipo de Animação é requerido!")
     private String tipo_animacao;

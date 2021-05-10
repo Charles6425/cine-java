@@ -46,7 +46,7 @@ public class SessaoController {
     @PostMapping
     public ResponseEntity<SessaoModel> create( @RequestParam(value = "sala", defaultValue = "0") Integer id_cat,
                                                @RequestParam(value = "filme", defaultValue = "0") Integer id_filme,
-                                              @Valid @RequestBody SessaoModel obj) {
+                                               @RequestBody SessaoModel obj) {
         SessaoModel newObj = service.create(id_cat,id_filme, obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/sessao/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
