@@ -14,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -30,6 +29,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException, IOException, ServletException {
+		
 		
 		AccountCredentials credentials = new ObjectMapper()
 				.readValue(request.getInputStream(), AccountCredentials.class);
