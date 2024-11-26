@@ -3,6 +3,13 @@ package com.api.cinejava.controller;
 import com.api.cinejava.dto.FilmeDto;
 import com.api.cinejava.model.FilmeModel;
 import com.api.cinejava.service.FilmeService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +23,15 @@ import java.util.stream.Collectors;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/filme")
+
 public class FilmeController {
 
     @Autowired
     private FilmeService service;
 
+
     @GetMapping("/{id}")
+
     public ResponseEntity<FilmeModel> findById(@PathVariable Integer id) {
         FilmeModel obj = service.findById(id);
         return ResponseEntity.ok().body(obj);

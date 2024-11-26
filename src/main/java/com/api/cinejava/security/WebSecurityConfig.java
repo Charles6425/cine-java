@@ -18,35 +18,36 @@ import com.api.cinejava.service.UsuarioService;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	private UsuarioService userDetailsService;
 
-	@Override
-	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf().disable().authorizeRequests()
-			.antMatchers("/home").permitAll()
-			.antMatchers(HttpMethod.POST, "/login").permitAll()
-			.anyRequest().authenticated()
-			.and()
-	
-			.addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
-	                UsernamePasswordAuthenticationFilter.class)
-			.addFilterBefore(new JWTAuthenticationFilter(),
-	                UsernamePasswordAuthenticationFilter.class);
-	}
-	
-	//Autenticação via JPA
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {		
-		auth.userDetailsService(userDetailsService)
-		.passwordEncoder(new BCryptPasswordEncoder());		
-		
-	}
-	
-	
-	@Override
-	public void configure(WebSecurity web) throws Exception {
+    @Autowired
+    private UsuarioService userDetailsService;
+
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf().disable().authorizeRequests()
+                .antMatchers("/home").permitAll()
+                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
+
+                .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
+                        UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JWTAuthenticationFilter(),
+                        UsernamePasswordAuthenticationFilter.class);
+    }
+
+    //Autenticação via JPA
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(new BCryptPasswordEncoder());
+
+    }
+
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers( "/h2-console/**");
-	}
+
+    }
 }
